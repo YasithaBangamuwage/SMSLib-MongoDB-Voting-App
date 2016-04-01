@@ -59,14 +59,21 @@ public class DashBoardController {
 
 		List<InboundMessage> msgList = getVoteCounter().readVoteMessages();
 
+		boolean isParticipantFound = false;
+
 		for (InboundMessage inboundMessage : msgList) {
+
+			isParticipantFound = false;
 
 			if (isInt(inboundMessage.getText())) {
 
 				for (Participant participant : participants) {
-					// participant have the vote
 
+					// participant have the vote
 					if (participant.getRefNo().equals(inboundMessage.getText())) {
+
+						isParticipantFound = true;
+
 						participant.setVoteCount(participant.getVoteCount() + 1);
 
 						// set participantWrapperList
@@ -78,6 +85,10 @@ public class DashBoardController {
 						// delete msg from sim inbox
 						// getVoteCounter().deleteMessage(inboundMessage);
 
+					}
+
+					if (isParticipantFound) {
+						break;
 					}
 				}
 			}
