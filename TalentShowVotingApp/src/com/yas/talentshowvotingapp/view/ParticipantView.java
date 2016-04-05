@@ -37,13 +37,18 @@ public class ParticipantView extends JFrame {
 	private JTable table;
 	JButton btnUpdate;
 	JButton btnAdd;
-	JButton btnNext;
+	private JButton btnNext;
+
 	private final DefaultTableModel tbleModel = new DefaultTableModel(
 			new String[] { "Participant Id", "Name", "Ref No", "Group Name", "Vote Count" }, 0);
 	private JLabel lblPreferedItem;
 	private JComboBox comboBoxItems;
 	private JButton btnCancel;
 	private JTextField txtGroupname;
+
+	public JButton getBtnNext() {
+		return btnNext;
+	}
 
 	/**
 	 * Create the frame.
@@ -294,9 +299,17 @@ public class ParticipantView extends JFrame {
 						AppController.getAppController().setAppToDefaultMode();
 
 					}
-				} else {
+				} else if (AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_CREATED)
+						|| AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_ONGOING)) {
+					
+					
+					//update dashboard view data
+					AppController.getAppController().getDashBoardController().refreshDashBoard();
+					
 					AppController.getAppController().getParticipantContoller().getParticipantView()
 							.setVisible(Boolean.FALSE);
+					AppController.getAppController().getParticipantContoller().getParticipantView().getBtnNext()
+					.setVisible(Boolean.TRUE);
 
 				}
 			}

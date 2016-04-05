@@ -41,6 +41,8 @@ public class EventController {
 	public Event getLatestActiveEvent(){
 		
 		setEvent(votingAppService.getLatestActiveEvent());
+		
+		
 		return this.event;
 	}
 	

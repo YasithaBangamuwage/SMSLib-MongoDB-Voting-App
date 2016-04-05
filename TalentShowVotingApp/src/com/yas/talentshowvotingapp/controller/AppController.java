@@ -63,7 +63,7 @@ public class AppController {
 
 		}
 
-		if (!this.appStatus.equals(AppStatus.EVENT_CREATING)) {
+		if (this.appStatus.equals(AppStatus.EVENT_CREATED) || this.appStatus.equals(AppStatus.EVENT_ONGOING)) {
 			// display relevant items into item view table.
 			itemController.getItemView()
 					.updateItemTable(AppController.getAppController().getItemController().getItems());

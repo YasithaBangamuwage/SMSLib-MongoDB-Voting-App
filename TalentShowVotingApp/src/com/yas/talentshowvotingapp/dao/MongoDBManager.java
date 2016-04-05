@@ -30,7 +30,7 @@ public class MongoDBManager {
 				mongo = new MongoClient("localhost", 27017);
 				// connect with the database
 				mongoMgr = mongo.getDB("talentShow");
-				System.out.println("Connect to database(talentShow) successfully");
+				//.out.println("Connect to database(talentShow) successfully");
 			} catch (UnknownHostException e) {
 				System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			}

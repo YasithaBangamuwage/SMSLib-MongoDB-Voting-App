@@ -18,9 +18,13 @@ public class DashBoardController {
 
 	private VotingAppService votingAppService = new DataManager();
 	private AppDashboardView appDashboardView;
-	private VoteCounter voteCounter = new VoteCounter();
+	private VoteCounter voteCounter;
 
 	public VoteCounter getVoteCounter() {
+
+		if (voteCounter == null) {
+			voteCounter = new VoteCounter();
+		}
 		return voteCounter;
 	}
 
@@ -104,6 +108,16 @@ public class DashBoardController {
 						AppController.getAppController().getEventController().getEvent().getEventId()),
 				AppController.getAppController().getEventController().getLatestActiveEvent());
 
+	}
+	
+	
+	public void refreshDashBoard(){
+		
+		//manage votes if event ongoing
+		//managingVotes();
+		//update view with latest event data
+		//getAppDashboardView().refreshView();
+		
 	}
 
 	private boolean isInt(String s) {

@@ -28,7 +28,7 @@ public class DataManager implements VotingAppService {
 		Gson gson = new Gson();
 		BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(event));
 		WriteResult result = dbCol.insert(obj);
-		System.out.println("Added event : " + event.getName());
+		//System.out.println("Added event : " + event.getName());
 
 	}
 
