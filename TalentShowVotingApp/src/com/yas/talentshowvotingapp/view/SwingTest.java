@@ -7,12 +7,14 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextPane;
 
 public class SwingTest extends JFrame {
@@ -59,33 +61,49 @@ public class SwingTest extends JFrame {
 		panelCreating.setBackground(Color.ORANGE);
 		panelCreating.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
-		GridBagConstraints c = new GridBagConstraints();
-		c.insets = new Insets(0, 0, 4, 4);
-		c.anchor = GridBagConstraints.FIRST_LINE_START;
-		c.weightx = c.weighty = 0;
+		Object rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
+				{ "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
+		Object columnNames[] = { "Column One", "Column Two", "Column Three" };
+		JTable table = new JTable(rowData, columnNames);
 
-		c.gridx = 0;
-		c.gridy = GridBagConstraints.RELATIVE;
-		c.gridwidth = GridBagConstraints.REMAINDER;
-		c.gridheight = 1;
-		c.fill = GridBagConstraints.BOTH;
-		panelCreating.add(textPane1, c);
+		JScrollPane scrollPane = new JScrollPane(table);
 
-		button1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				textPane1.setText(textPane1.getText() + "\na");
-				textPane2.setText(textPane2.getText() + "\nb");
-			}
-		});
-		panelCreating.add(button1, c);
+		GridBagConstraints gbcTableScrollPane = new GridBagConstraints();
+		gbcTableScrollPane.insets = new Insets(0, 0, 4, 4);
+		gbcTableScrollPane.anchor = GridBagConstraints.FIRST_LINE_START;
+		gbcTableScrollPane.weightx = gbcTableScrollPane.weighty = 0;
 
-		panelCreating.add(textPane2, c);
+		gbcTableScrollPane.gridx = 0;
+		gbcTableScrollPane.gridy = GridBagConstraints.RELATIVE;
+		gbcTableScrollPane.gridwidth = GridBagConstraints.REMAINDER;
+		gbcTableScrollPane.gridheight = 1;
+		gbcTableScrollPane.fill = GridBagConstraints.BOTH;
+		panelCreating.add(scrollPane, gbcTableScrollPane);
 
 		// -------------------------------------------------------
 
 		getContentPane().setLayout(new GridBagLayout());
-		c = new GridBagConstraints();
+		GridBagConstraints c = new GridBagConstraints();
 
 		c.ipadx = c.ipady = 0;
 		c.insets = new Insets(0, 0, 0, 0);
@@ -97,9 +115,6 @@ public class SwingTest extends JFrame {
 		c.weightx = 0;
 		c.fill = GridBagConstraints.BOTH;
 		getContentPane().add(scrollPaneCreating, c);
-		
-		
-		
 
 		c.gridx = 0;
 		c.gridy = 0;
