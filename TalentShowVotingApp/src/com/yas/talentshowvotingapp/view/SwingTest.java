@@ -33,33 +33,26 @@ public class SwingTest extends JFrame {
 		});
 	}
 
-	private JPanel panelCreating;
-	private JScrollPane scrollPaneCreating;
-	private JTextPane textPane1, textPane2;
-	private JButton button1;
-
+	private JPanel itemsDataPanel;
+	private JScrollPane itemsScrollPane;
+	
 	private void initComponents() {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(600, 600));
 
-		panelCreating = new JPanel();
-		scrollPaneCreating = new JScrollPane(panelCreating, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+		itemsDataPanel = new JPanel();
+		itemsScrollPane = new JScrollPane(itemsDataPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-		scrollPaneCreating.setMinimumSize(new Dimension(160, 200));
-		scrollPaneCreating.setPreferredSize(new Dimension(160, 200));
+		itemsScrollPane.setMinimumSize(new Dimension(160, 200));
+		itemsScrollPane.setPreferredSize(new Dimension(160, 200));
 
-		textPane1 = new JTextPane();
-		textPane1.setText("a\na");
-		textPane2 = new JTextPane();
-		textPane2.setText("b\nb");
-		button1 = new JButton("+++");
+		
+		// ----------------- item data nned to run inside of the for loop -----------------------
 
-		// ----------------- Left Panel Init -----------------------
-
-		panelCreating.setLayout(new GridBagLayout());
-		panelCreating.setBackground(Color.ORANGE);
-		panelCreating.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+		itemsDataPanel.setLayout(new GridBagLayout());
+		itemsDataPanel.setBackground(Color.ORANGE);
+		itemsDataPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
 		Object rowData[][] = { { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
 				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
@@ -83,11 +76,27 @@ public class SwingTest extends JFrame {
 				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
 				{ "Row1-Column1", "Row1-Column2", "Row1-Column3" }, { "Row1-Column1", "Row1-Column2", "Row1-Column3" },
 				{ "Row2-Column1", "Row2-Column2", "Row2-Column3" } };
+		
 		Object columnNames[] = { "Column One", "Column Two", "Column Three" };
 		JTable table = new JTable(rowData, columnNames);
 
 		JScrollPane scrollPane = new JScrollPane(table);
+		
+		JLabel lblItemName = new JLabel("item name");
+		
 
+		GridBagConstraints gbcitemName = new GridBagConstraints();
+		gbcitemName.insets = new Insets(0, 0, 4, 4);
+		gbcitemName.anchor = GridBagConstraints.FIRST_LINE_START;
+		gbcitemName.weightx = gbcitemName.weighty = 0;
+
+		gbcitemName.gridx = 0;
+		gbcitemName.gridy = GridBagConstraints.RELATIVE;
+		gbcitemName.gridwidth = GridBagConstraints.REMAINDER;
+		gbcitemName.gridheight = 1;
+		gbcitemName.fill = GridBagConstraints.BOTH;
+		itemsDataPanel.add(lblItemName, gbcitemName);
+		
 		GridBagConstraints gbcTableScrollPane = new GridBagConstraints();
 		gbcTableScrollPane.insets = new Insets(0, 0, 4, 4);
 		gbcTableScrollPane.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -98,30 +107,35 @@ public class SwingTest extends JFrame {
 		gbcTableScrollPane.gridwidth = GridBagConstraints.REMAINDER;
 		gbcTableScrollPane.gridheight = 1;
 		gbcTableScrollPane.fill = GridBagConstraints.BOTH;
-		panelCreating.add(scrollPane, gbcTableScrollPane);
+		itemsDataPanel.add(scrollPane, gbcTableScrollPane);
 
-		// -------------------------------------------------------
+		// -------------------------------------------------------//////////////
+		
+		
 
 		getContentPane().setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints gbcItemsScrollPane = new GridBagConstraints();
 
-		c.ipadx = c.ipady = 0;
-		c.insets = new Insets(0, 0, 0, 0);
-		c.weighty = 0;
-		c.gridheight = 1;
-		c.gridx = 0;
-		c.gridy = 1;
-		c.gridwidth = 1;
-		c.weightx = 0;
-		c.fill = GridBagConstraints.BOTH;
-		getContentPane().add(scrollPaneCreating, c);
-
-		c.gridx = 0;
-		c.gridy = 0;
-		c.fill = GridBagConstraints.BOTH;
-		c.weightx = 1;
-		c.weighty = 1;
-		getContentPane().add(new JLabel("test"), c);
+		gbcItemsScrollPane.ipadx = 0;
+		gbcItemsScrollPane.ipady = 0;
+		gbcItemsScrollPane.insets = new Insets(0, 0, 0, 0);
+		gbcItemsScrollPane.weighty = 0;
+		gbcItemsScrollPane.gridheight = 1;
+		gbcItemsScrollPane.gridx = 0;
+		gbcItemsScrollPane.gridy = 1;
+		gbcItemsScrollPane.gridwidth = 1;
+		gbcItemsScrollPane.weightx = 0;
+		gbcItemsScrollPane.fill = GridBagConstraints.BOTH;
+		getContentPane().add(itemsScrollPane, gbcItemsScrollPane);
+		
+		GridBagConstraints gbcControllPanel = new GridBagConstraints();
+		
+		gbcControllPanel.gridx = 0;
+		gbcControllPanel.gridy = 0;
+		gbcControllPanel.fill = GridBagConstraints.BOTH;
+		gbcControllPanel.weightx = 1;
+		gbcControllPanel.weighty = 1;
+		getContentPane().add(new JLabel("test"), gbcControllPanel);
 
 	}
 }
