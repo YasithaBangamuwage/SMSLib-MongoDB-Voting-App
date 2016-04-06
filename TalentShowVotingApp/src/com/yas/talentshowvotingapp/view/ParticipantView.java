@@ -220,6 +220,8 @@ public class ParticipantView extends JFrame {
 							.setVisible(Boolean.FALSE);
 					AppController.getAppController().getDashBoardController().getAppDashboardView()
 							.setVisible(Boolean.TRUE);
+					AppController.getAppController().getDashBoardController().getAppDashboardView()
+							.refreshItemScrollPane();
 					AppController.getAppController().setAppStatus(AppStatus.EVENT_CREATED);
 				}
 
@@ -301,15 +303,14 @@ public class ParticipantView extends JFrame {
 					}
 				} else if (AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_CREATED)
 						|| AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_ONGOING)) {
-					
-					
-					//update dashboard view data
+
+					// update dashboard view data
 					AppController.getAppController().getDashBoardController().refreshDashBoard();
-					
+
 					AppController.getAppController().getParticipantContoller().getParticipantView()
 							.setVisible(Boolean.FALSE);
 					AppController.getAppController().getParticipantContoller().getParticipantView().getBtnNext()
-					.setVisible(Boolean.TRUE);
+							.setVisible(Boolean.TRUE);
 
 				}
 			}

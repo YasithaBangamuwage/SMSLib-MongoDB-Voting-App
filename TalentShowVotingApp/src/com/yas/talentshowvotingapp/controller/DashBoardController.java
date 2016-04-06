@@ -114,9 +114,9 @@ public class DashBoardController {
 	public void refreshDashBoard(){
 		
 		//manage votes if event ongoing
-		//managingVotes();
+		managingVotes();
 		//update view with latest event data
-		//getAppDashboardView().refreshView();
+		getAppDashboardView().refreshItemScrollPane();
 		
 	}
 

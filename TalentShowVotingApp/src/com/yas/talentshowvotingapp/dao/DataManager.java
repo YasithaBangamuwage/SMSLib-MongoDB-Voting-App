@@ -1,6 +1,7 @@
 package com.yas.talentshowvotingapp.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -28,7 +29,7 @@ public class DataManager implements VotingAppService {
 		Gson gson = new Gson();
 		BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(event));
 		WriteResult result = dbCol.insert(obj);
-		//System.out.println("Added event : " + event.getName());
+		// System.out.println("Added event : " + event.getName());
 
 	}
 
@@ -168,18 +169,45 @@ public class DataManager implements VotingAppService {
 		dbCol.update(searchQuery, updateCommand);
 
 	}
-	
-	
+
 	@Override
 	public void addVoteToParticipant(List<ParticipantWrapper> participantWrapperList) {
-		// TODO Auto-generated method stub
-		
+
+		for (ParticipantWrapper participantWrapper : participantWrapperList) {
+
+			DB userDB = MongoDBManager.getInstance();
+			DBCollection dbCol = userDB.getCollection("participants");
+
+			BasicDBObject searchQuery = new BasicDBObject();
+			searchQuery.put("participantId", participantWrapper.getUpdatedParticipant().getParticipantId());
+
+			BasicDBObject updatedData = new BasicDBObject();
+			updatedData.put("voteCount", participantWrapper.getUpdatedParticipant().getVoteCount());
+
+			BasicDBObject updateCommand = new BasicDBObject("$set", updatedData);
+
+			dbCol.update(searchQuery, updateCommand);
+
+			Gson gson = new Gson();
+
+			BasicDBObject newVote = (BasicDBObject) JSON.parse(gson.toJson(participantWrapper.getVote()));
+			BasicDBObject updateCommand2 = new BasicDBObject("$push", new BasicDBObject("votes", newVote));
+			dbCol.update(searchQuery, updateCommand2);
+
+		}
+
 	}
-	
-	
-	
-	
-	
-	
+
+	@Override
+	public void setEventEndDate(String eventId, Date endDate) {
+		DB userDB = MongoDBManager.getInstance();
+		DBCollection dbCol = userDB.getCollection("event");
+
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("eventId", eventId);
+		BasicDBObject updateCommand = new BasicDBObject("$set", new BasicDBObject("endTime", endDate));
+
+		dbCol.update(searchQuery, updateCommand);
+	}
 
 }

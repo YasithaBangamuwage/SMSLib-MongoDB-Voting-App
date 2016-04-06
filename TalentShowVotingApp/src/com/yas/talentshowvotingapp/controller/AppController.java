@@ -10,7 +10,6 @@ public class AppController {
 
 	public static AppController instance;
 	private AppMainWindowController appMainWindowController;
-	private AppDashboardView appDashboardView;
 	private EventController eventController;
 	private ItemController itemController;
 	private ParticipantContoller participantContoller;
@@ -38,14 +37,7 @@ public class AppController {
 		return appMainWindowController;
 	}
 
-	public AppDashboardView getAppDashboardView() {
-		if (appDashboardView == null) {
-			appDashboardView = new AppDashboardView();
-			return appDashboardView;
 
-		}
-		return appDashboardView;
-	}
 
 	public EventController getEventController() {
 		if (eventController == null) {

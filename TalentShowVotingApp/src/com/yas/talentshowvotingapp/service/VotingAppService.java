@@ -1,12 +1,12 @@
 package com.yas.talentshowvotingapp.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
 import com.yas.talentshowvotingapp.model.ParticipantWrapper;
-import com.yas.talentshowvotingapp.model.Vote;
 
 public interface VotingAppService {
 
@@ -26,11 +26,11 @@ public interface VotingAppService {
 	
 	List<Participant> getEventParticipants(final String eventId);
 	
-	void updateParticipant( Participant participant);
+	void updateParticipant( final Participant participant);
 	
 	void addVoteToParticipant(final List<ParticipantWrapper> participantWrapperList);
 	
-	
+	void setEventEndDate(final String eventId, final Date endDate);
 
 	
 	

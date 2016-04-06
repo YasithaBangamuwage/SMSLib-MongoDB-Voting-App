@@ -1,12 +1,9 @@
 package com.yas.talentshowvotingapp.controller;
 
-import java.util.List;
-
-import javax.swing.JFrame;
+import java.util.Date;
 
 import com.yas.talentshowvotingapp.dao.DataManager;
 import com.yas.talentshowvotingapp.model.Event;
-import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.service.VotingAppService;
 import com.yas.talentshowvotingapp.view.EventView;
 
@@ -37,17 +34,20 @@ public class EventController {
 		setEvent(event);
 
 	}
-	
-	public Event getLatestActiveEvent(){
-		
+
+	public Event getLatestActiveEvent() {
+
 		setEvent(votingAppService.getLatestActiveEvent());
-		
-		
+
 		return this.event;
 	}
-	
-	public void setEventActiveMode(boolean isActive){
+
+	public void setEventActiveMode(boolean isActive) {
 		votingAppService.setEventActiveMode(this.event.getEventId(), isActive);
+	}
+
+	public void setEventEndDate(final Date endDate) {
+		votingAppService.setEventEndDate(this.event.getEventId(), endDate);
 	}
 
 	public Event getEvent() {
@@ -57,11 +57,5 @@ public class EventController {
 	public void setEvent(Event event) {
 		this.event = event;
 	}
-
-
-
-	
-
-	
 
 }
