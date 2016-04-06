@@ -18,6 +18,9 @@ import java.awt.event.ActionEvent;
 public class AppMainWindow {
 
 	private JFrame frame;
+	private JButton btnLaunchEvent;
+	private JButton btnEventHistory;
+	private JButton btnConfigurations;
 
 	public JFrame getFrame() {
 		return frame;
@@ -41,6 +44,8 @@ public class AppMainWindow {
 
 	/**
 	 * Create the application.
+	 * 
+	 * @wbp.parser.entryPoint
 	 */
 	public AppMainWindow() {
 		initialize();
@@ -58,14 +63,15 @@ public class AppMainWindow {
 		JLabel lblAppName = new JLabel("Talent Show Voting App");
 		frame.getContentPane().add(lblAppName);
 
-		JButton btnLaunchEvent = new JButton("Launch New Event");
+		btnLaunchEvent = new JButton("Launch New Event");
 
 		frame.getContentPane().add(btnLaunchEvent);
 
-		JButton btnEventHistory = new JButton("Event History");
+		btnEventHistory = new JButton("Event History");
+
 		frame.getContentPane().add(btnEventHistory);
 
-		JButton btnConfigurations = new JButton("Configurations");
+		btnConfigurations = new JButton("Configurations");
 		frame.getContentPane().add(btnConfigurations);
 
 		/*********** events goes here ********************/
@@ -75,6 +81,14 @@ public class AppMainWindow {
 
 				AppController.getAppController().setAppStatus(AppStatus.EVENT_CREATING);
 				AppController.getAppController().getEventController().getEventView().setVisible(Boolean.TRUE);
+			}
+		});
+
+		btnEventHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AppController.getAppController().setAppStatus(AppStatus.DEFAULT);
+				AppController.getAppController().getEventHistoryController().getEventHistoryView()
+						.setVisible(Boolean.TRUE);
 			}
 		});
 	}

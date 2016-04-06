@@ -2,6 +2,7 @@ package com.yas.talentshowvotingapp.controller;
 
 import com.yas.talentshowvotingapp.other.AppStatus;
 import com.yas.talentshowvotingapp.view.AppDashboardView;
+import com.yas.talentshowvotingapp.view.EventHistoryView;
 import com.yas.talentshowvotingapp.view.EventView;
 import com.yas.talentshowvotingapp.view.ItemView;
 import com.yas.talentshowvotingapp.view.ParticipantView;
@@ -15,6 +16,7 @@ public class AppController {
 	private ParticipantContoller participantContoller;
 	private DashBoardController dashBoardController;
 	private AppStatus appStatus;
+	private EventHistoryController eventHistoryController;
 
 	private AppController() {
 	}
@@ -36,8 +38,6 @@ public class AppController {
 		}
 		return appMainWindowController;
 	}
-
-
 
 	public EventController getEventController() {
 		if (eventController == null) {
@@ -75,11 +75,19 @@ public class AppController {
 		return participantContoller;
 	}
 
+	public EventHistoryController getEventHistoryController() {
+		if (eventHistoryController == null) {
+			eventHistoryController = new EventHistoryController(new EventHistoryView());
+			return eventHistoryController;
+		}
+
+		return eventHistoryController;
+	}
+
 	public DashBoardController getDashBoardController() {
 		if (dashBoardController == null) {
 			dashBoardController = new DashBoardController(new AppDashboardView());
 			return dashBoardController;
-
 		}
 
 		return dashBoardController;
