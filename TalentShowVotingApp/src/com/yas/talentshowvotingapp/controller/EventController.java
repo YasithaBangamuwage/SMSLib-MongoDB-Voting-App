@@ -1,6 +1,7 @@
 package com.yas.talentshowvotingapp.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import com.yas.talentshowvotingapp.dao.DataManager;
 import com.yas.talentshowvotingapp.model.Event;
@@ -33,6 +34,10 @@ public class EventController {
 		// this event will access through all the application.
 		setEvent(event);
 
+	}
+	
+	public List<Event> getAvailbleEvents(){
+		return votingAppService.getAllEvents();
 	}
 
 	public Event getLatestActiveEvent() {

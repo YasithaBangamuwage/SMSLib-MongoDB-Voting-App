@@ -16,7 +16,6 @@ import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
 import com.yas.talentshowvotingapp.model.ParticipantWrapper;
-import com.yas.talentshowvotingapp.model.Vote;
 import com.yas.talentshowvotingapp.service.VotingAppService;
 
 public class DataManager implements VotingAppService {
@@ -208,6 +207,37 @@ public class DataManager implements VotingAppService {
 		BasicDBObject updateCommand = new BasicDBObject("$set", new BasicDBObject("endTime", endDate));
 
 		dbCol.update(searchQuery, updateCommand);
+	}
+
+	@Override
+	public Event getEvent(String eventId) {
+
+		DB userDB = MongoDBManager.getInstance();
+		DBCollection dbCol = userDB.getCollection("event");
+
+		BasicDBObject searchQuery = new BasicDBObject();
+		searchQuery.put("eventId", eventId);
+
+		DBObject dbobj = dbCol.findOne(searchQuery);
+
+		return (new Gson()).fromJson(dbobj.toString(), Event.class);
+	}
+
+	@Override
+	public List<Event> getAllEvents() {
+
+		List<Event> events = new ArrayList<Event>();
+		DB userDB = MongoDBManager.getInstance();
+		DBCollection dbCol = userDB.getCollection("event");
+
+		DBCursor cursor = dbCol.find();
+		while (cursor.hasNext()) {
+
+			events.add((new Gson()).fromJson(cursor.next().toString(), Event.class));
+
+		}
+
+		return events;
 	}
 
 }

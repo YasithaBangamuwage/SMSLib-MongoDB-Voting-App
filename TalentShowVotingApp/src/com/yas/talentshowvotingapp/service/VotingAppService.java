@@ -32,6 +32,8 @@ public interface VotingAppService {
 	
 	void setEventEndDate(final String eventId, final Date endDate);
 
+	Event getEvent(final String eventId);
 	
+	List<Event> getAllEvents();
 	
 }

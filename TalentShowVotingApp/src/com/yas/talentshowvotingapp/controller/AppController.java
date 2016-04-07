@@ -104,6 +104,7 @@ public class AppController {
 		this.itemController = null;
 		this.participantContoller = null;
 		this.dashBoardController = null;
+		this.eventHistoryController = null;
 
 	}
 
