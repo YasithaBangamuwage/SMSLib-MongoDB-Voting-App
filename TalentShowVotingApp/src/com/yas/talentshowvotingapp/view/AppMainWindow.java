@@ -72,6 +72,7 @@ public class AppMainWindow {
 		frame.getContentPane().add(btnEventHistory);
 
 		btnConfigurations = new JButton("Configurations");
+
 		frame.getContentPane().add(btnConfigurations);
 
 		/*********** events goes here ********************/
@@ -88,6 +89,14 @@ public class AppMainWindow {
 			public void actionPerformed(ActionEvent e) {
 				AppController.getAppController().setAppStatus(AppStatus.DEFAULT);
 				AppController.getAppController().getEventHistoryController().getEventHistoryView()
+						.setVisible(Boolean.TRUE);
+			}
+		});
+
+		btnConfigurations.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				AppController.getAppController().getConfigurationController().getConfigurationView()
 						.setVisible(Boolean.TRUE);
 			}
 		});

@@ -2,6 +2,7 @@ package com.yas.talentshowvotingapp.controller;
 
 import com.yas.talentshowvotingapp.other.AppStatus;
 import com.yas.talentshowvotingapp.view.AppDashboardView;
+import com.yas.talentshowvotingapp.view.ConfigurationView;
 import com.yas.talentshowvotingapp.view.EventHistoryView;
 import com.yas.talentshowvotingapp.view.EventView;
 import com.yas.talentshowvotingapp.view.ItemView;
@@ -17,6 +18,7 @@ public class AppController {
 	private DashBoardController dashBoardController;
 	private AppStatus appStatus;
 	private EventHistoryController eventHistoryController;
+	private ConfigurationController configurationController;
 
 	private AppController() {
 	}
@@ -92,7 +94,16 @@ public class AppController {
 
 		return dashBoardController;
 	}
+	
+	public ConfigurationController getConfigurationController() {
+		if (configurationController == null) {
+			configurationController = new ConfigurationController(new ConfigurationView());
+			return configurationController;
+		}
 
+		return configurationController;
+	}
+	
 	public void setAppToDefaultMode() {
 		// update event object in db side to false.
 
