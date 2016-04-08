@@ -21,6 +21,9 @@ import com.yas.talentshowvotingapp.controller.AppController;
 import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.other.AppStatus;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class EventView extends JFrame {
 
@@ -28,38 +31,48 @@ public class EventView extends JFrame {
 	private JTextField txtEventname;
 	private JTextField txtOrganizername;
 	private JButton btnNext;
-	private JLabel lblStartDate;
 	private JLabel lblInfo;
 	private JButton btnCancel;
 	private JButton btnAdd;
+	private JPanel panel_1;
+	private JLabel lblAdd;
 
 	/**
 	 * Create the frame.
 	 */
 	public EventView() {
 		 setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 533, 259);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0,
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
+		
+		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+		gbc_panel_1.anchor = GridBagConstraints.WEST;
+		gbc_panel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_panel_1.gridx = 0;
+		gbc_panel_1.gridy = 0;
+		contentPane.add(panel_1, gbc_panel_1);
+		
+		lblAdd = new JLabel("INITIATE EVENT");
+		lblAdd.setForeground(new Color(0, 51, 255));
+		lblAdd.setBackground(new Color(102, 0, 0));
+		lblAdd.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 19));
+		panel_1.add(lblAdd);
 
-		JLabel lblStepCreateevent = new JLabel("Create Event");
-		GridBagConstraints gbc_lblStepCreateevent = new GridBagConstraints();
-		gbc_lblStepCreateevent.gridwidth = 2;
-		gbc_lblStepCreateevent.fill = GridBagConstraints.VERTICAL;
-		gbc_lblStepCreateevent.insets = new Insets(0, 0, 5, 0);
-		gbc_lblStepCreateevent.gridx = 0;
-		gbc_lblStepCreateevent.gridy = 0;
-		contentPane.add(lblStepCreateevent, gbc_lblStepCreateevent);
-
-		JLabel lblEventName = new JLabel("Event Name");
+		JLabel lblEventName = new JLabel("Name");
+		lblEventName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
+		lblEventName.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblEventName = new GridBagConstraints();
 		gbc_lblEventName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEventName.anchor = GridBagConstraints.EAST;
@@ -77,6 +90,7 @@ public class EventView extends JFrame {
 		txtEventname.setColumns(10);
 
 		JLabel lblOrganizer = new JLabel("Organizer");
+		lblOrganizer.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblOrganizer = new GridBagConstraints();
 		gbc_lblOrganizer.anchor = GridBagConstraints.EAST;
 		gbc_lblOrganizer.insets = new Insets(0, 0, 5, 5);
@@ -93,49 +107,47 @@ public class EventView extends JFrame {
 		contentPane.add(txtOrganizername, gbc_txtOrganizername);
 		txtOrganizername.setColumns(10);
 
-		lblStartDate = new JLabel("Start Date");
-		GridBagConstraints gbc_lblStartDate = new GridBagConstraints();
-		gbc_lblStartDate.anchor = GridBagConstraints.EAST;
-		gbc_lblStartDate.insets = new Insets(0, 0, 5, 5);
-		gbc_lblStartDate.gridx = 0;
-		gbc_lblStartDate.gridy = 4;
-		contentPane.add(lblStartDate, gbc_lblStartDate);
-
-		JLabel lblStartdate = new JLabel("      ");
-		GridBagConstraints gbc_lblStartdate = new GridBagConstraints();
-		gbc_lblStartdate.insets = new Insets(0, 0, 5, 0);
-		gbc_lblStartdate.gridx = 1;
-		gbc_lblStartdate.gridy = 4;
-		contentPane.add(lblStartdate, gbc_lblStartdate);
-
-		lblInfo = new JLabel("Info");
+		lblInfo = new JLabel("");
+		lblInfo.setForeground(new Color(255, 51, 51));
+		lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInfo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
+		gbc_lblInfo.fill = GridBagConstraints.BOTH;
 		gbc_lblInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInfo.gridx = 1;
-		gbc_lblInfo.gridy = 6;
+		gbc_lblInfo.gridy = 5;
 		contentPane.add(lblInfo, gbc_lblInfo);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 1;
-		gbc_panel.gridy = 7;
+		gbc_panel.gridy = 6;
 		contentPane.add(panel, gbc_panel);
 
 		btnCancel = new JButton("Cancel");
+		btnCancel.setForeground(new Color(0, 51, 51));
+		btnCancel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
+		btnCancel.setBackground(new Color(255, 255, 255));
 
 		panel.add(btnCancel);
 
 		btnAdd = new JButton("Add");
+		btnAdd.setBackground(new Color(255, 255, 255));
+		btnAdd.setForeground(new Color(0, 51, 51));
+		btnAdd.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		panel.add(btnAdd);
 
 		btnNext = new JButton("Next >");
+		btnNext.setBackground(new Color(255, 255, 255));
+		btnNext.setForeground(new Color(0, 51, 51));
+		btnNext.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 		panel.add(btnNext);
 
 		btnNext.setEnabled(Boolean.FALSE);
-		lblStartDate.setText(new Date().toLocaleString());
 
 		/***************** action events goes here ***************/
 		btnAdd.addActionListener(new ActionListener() {
