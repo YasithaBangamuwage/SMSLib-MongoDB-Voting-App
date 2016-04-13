@@ -28,6 +28,8 @@ import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
 import com.yas.talentshowvotingapp.model.Vote;
 import com.yas.talentshowvotingapp.other.AppStatus;
+import java.awt.Font;
+import java.awt.Color;
 
 public class ParticipantView extends JFrame {
 
@@ -55,18 +57,21 @@ public class ParticipantView extends JFrame {
 	 */
 	public ParticipantView() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 638, 406);
+		setBounds(100, 100, 719, 406);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
-		JLabel lblAddParticipants = new JLabel("Add Participants");
+		JLabel lblAddParticipants = new JLabel("PARTICIPANTS TO EVENT");
+		lblAddParticipants.setForeground(new Color(153, 0, 102));
+		lblAddParticipants.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 19));
 		GridBagConstraints gbc_lblAddParticipants = new GridBagConstraints();
 		gbc_lblAddParticipants.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAddParticipants.gridx = 0;
@@ -74,11 +79,12 @@ public class ParticipantView extends JFrame {
 		contentPane.add(lblAddParticipants, gbc_lblAddParticipants);
 
 		JLabel lblParticipantName = new JLabel("Participant Name");
+		lblParticipantName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblParticipantName = new GridBagConstraints();
 		gbc_lblParticipantName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblParticipantName.anchor = GridBagConstraints.EAST;
 		gbc_lblParticipantName.gridx = 0;
-		gbc_lblParticipantName.gridy = 1;
+		gbc_lblParticipantName.gridy = 2;
 		contentPane.add(lblParticipantName, gbc_lblParticipantName);
 
 		txtParticipantname = new JTextField();
@@ -86,16 +92,17 @@ public class ParticipantView extends JFrame {
 		gbc_txtParticipantname.insets = new Insets(0, 0, 5, 0);
 		gbc_txtParticipantname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtParticipantname.gridx = 1;
-		gbc_txtParticipantname.gridy = 1;
+		gbc_txtParticipantname.gridy = 2;
 		contentPane.add(txtParticipantname, gbc_txtParticipantname);
 		txtParticipantname.setColumns(10);
 
 		JLabel lblReferanceNumber = new JLabel("Referance Number");
+		lblReferanceNumber.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblReferanceNumber = new GridBagConstraints();
 		gbc_lblReferanceNumber.anchor = GridBagConstraints.EAST;
 		gbc_lblReferanceNumber.insets = new Insets(0, 0, 5, 5);
 		gbc_lblReferanceNumber.gridx = 0;
-		gbc_lblReferanceNumber.gridy = 2;
+		gbc_lblReferanceNumber.gridy = 3;
 		contentPane.add(lblReferanceNumber, gbc_lblReferanceNumber);
 
 		txtReferancenumber = new JTextField();
@@ -103,33 +110,37 @@ public class ParticipantView extends JFrame {
 		gbc_txtReferancenumber.insets = new Insets(0, 0, 5, 0);
 		gbc_txtReferancenumber.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtReferancenumber.gridx = 1;
-		gbc_txtReferancenumber.gridy = 2;
+		gbc_txtReferancenumber.gridy = 3;
 		contentPane.add(txtReferancenumber, gbc_txtReferancenumber);
 		txtReferancenumber.setColumns(10);
 
 		lblPreferedItem = new JLabel("Prefered Item");
+		lblPreferedItem.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblPreferedItem = new GridBagConstraints();
 		gbc_lblPreferedItem.anchor = GridBagConstraints.EAST;
 		gbc_lblPreferedItem.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPreferedItem.gridx = 0;
-		gbc_lblPreferedItem.gridy = 3;
+		gbc_lblPreferedItem.gridy = 4;
 		contentPane.add(lblPreferedItem, gbc_lblPreferedItem);
 
 		comboBoxItems = new JComboBox();
+		comboBoxItems.setBackground(new Color(255, 255, 255));
+		comboBoxItems.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 
 		GridBagConstraints gbc_comboBoxItems = new GridBagConstraints();
 		gbc_comboBoxItems.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxItems.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxItems.gridx = 1;
-		gbc_comboBoxItems.gridy = 3;
+		gbc_comboBoxItems.gridy = 4;
 		contentPane.add(comboBoxItems, gbc_comboBoxItems);
 
 		JLabel lblGroupName = new JLabel("Group Name");
+		lblGroupName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblGroupName = new GridBagConstraints();
 		gbc_lblGroupName.anchor = GridBagConstraints.EAST;
 		gbc_lblGroupName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGroupName.gridx = 0;
-		gbc_lblGroupName.gridy = 4;
+		gbc_lblGroupName.gridy = 5;
 		contentPane.add(lblGroupName, gbc_lblGroupName);
 
 		txtGroupname = new JTextField();
@@ -137,16 +148,17 @@ public class ParticipantView extends JFrame {
 		gbc_txtGroupname.insets = new Insets(0, 0, 5, 0);
 		gbc_txtGroupname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtGroupname.gridx = 1;
-		gbc_txtGroupname.gridy = 4;
+		gbc_txtGroupname.gridy = 5;
 		contentPane.add(txtGroupname, gbc_txtGroupname);
 		txtGroupname.setColumns(10);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
 		gbc_panel_1.gridx = 1;
-		gbc_panel_1.gridy = 5;
+		gbc_panel_1.gridy = 6;
 		contentPane.add(panel_1, gbc_panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
 		gbl_panel_1.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -155,7 +167,9 @@ public class ParticipantView extends JFrame {
 		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		JLabel lblInfo = new JLabel("info");
+		JLabel lblInfo = new JLabel("");
+		lblInfo.setForeground(new Color(255, 0, 0));
+		lblInfo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
 		gbc_lblInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInfo.gridx = 0;
@@ -163,6 +177,9 @@ public class ParticipantView extends JFrame {
 		panel_1.add(lblInfo, gbc_lblInfo);
 
 		btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 255, 255));
+		btnCancel.setForeground(new Color(0, 51, 51));
+		btnCancel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
@@ -171,6 +188,9 @@ public class ParticipantView extends JFrame {
 		panel_1.add(btnCancel, gbc_btnCancel);
 
 		btnUpdate = new JButton("Update");
+		btnUpdate.setBackground(new Color(255, 255, 255));
+		btnUpdate.setForeground(new Color(0, 51, 51));
+		btnUpdate.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
@@ -179,6 +199,9 @@ public class ParticipantView extends JFrame {
 		panel_1.add(btnUpdate, gbc_btnUpdate);
 
 		btnAdd = new JButton("Add");
+		btnAdd.setBackground(new Color(255, 255, 255));
+		btnAdd.setForeground(new Color(0, 51, 51));
+		btnAdd.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 0, 0, 5);
@@ -187,6 +210,9 @@ public class ParticipantView extends JFrame {
 		panel_1.add(btnAdd, gbc_btnAdd);
 
 		btnNext = new JButton("Next >");
+		btnNext.setBackground(new Color(255, 255, 255));
+		btnNext.setForeground(new Color(0, 51, 51));
+		btnNext.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnNext = new GridBagConstraints();
 		gbc_btnNext.gridx = 4;
@@ -197,10 +223,11 @@ public class ParticipantView extends JFrame {
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 6;
+		gbc_scrollPane.gridy = 7;
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		table = new JTable();
+		table.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 11));
 		table.setModel(tbleModel);
 		// scrollPane.setColumnHeaderView(table);
 		scrollPane.setViewportView(table);
