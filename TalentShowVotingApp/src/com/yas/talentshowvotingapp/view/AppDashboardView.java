@@ -25,6 +25,7 @@ import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
 import com.yas.talentshowvotingapp.other.AppStatus;
+import java.awt.Font;
 
 public class AppDashboardView extends JFrame {
 
@@ -39,6 +40,7 @@ public class AppDashboardView extends JFrame {
 	 * Create the frame.
 	 */
 	public AppDashboardView() {
+		getContentPane().setBackground(new Color(255, 255, 255));
 		initComponents();
 
 	}
@@ -49,7 +51,7 @@ public class AppDashboardView extends JFrame {
 
 		itemsDataPanel = new JPanel();
 		itemsDataPanel.setLayout(new GridBagLayout());
-		itemsDataPanel.setBackground(Color.ORANGE);
+		itemsDataPanel.setBackground(new Color(102, 153, 255));
 		itemsDataPanel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
 		itemsScrollPane = new JScrollPane(itemsDataPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -80,6 +82,7 @@ public class AppDashboardView extends JFrame {
 		gbcControllPanel.fill = GridBagConstraints.BOTH;
 		gbcControllPanel.weightx = 1;
 		gbcControllPanel.weighty = 1;
+		controllPanel.setBackground(new Color(255, 255, 255));
 		getContentPane().add(controllPanel, gbcControllPanel);
 		GridBagLayout gbl_controllPanel = new GridBagLayout();
 		gbl_controllPanel.columnWidths = new int[] { 0, 0, 0, 0 };
@@ -89,13 +92,18 @@ public class AppDashboardView extends JFrame {
 		controllPanel.setLayout(gbl_controllPanel);
 
 		JLabel lblDashboard = new JLabel("DashBoard");
+		lblDashboard.setForeground(new Color(255, 0, 51));
+		lblDashboard.setFont(new Font("Microsoft YaHei UI Light", Font.PLAIN, 19));
 		GridBagConstraints gbc_lblDashboard = new GridBagConstraints();
-		gbc_lblDashboard.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDashboard.insets = new Insets(0, 0, 5, 7);
 		gbc_lblDashboard.gridx = 0;
 		gbc_lblDashboard.gridy = 0;
 		controllPanel.add(lblDashboard, gbc_lblDashboard);
 
 		btnSyncVotes = new JButton("Sync Votes");
+		btnSyncVotes.setForeground(new Color(0, 51, 51));
+		btnSyncVotes.setBackground(new Color(255, 255, 255));
+		btnSyncVotes.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 		
 		GridBagConstraints gbc_btnSyncVotes = new GridBagConstraints();
 		gbc_btnSyncVotes.insets = new Insets(0, 0, 0, 5);
@@ -104,6 +112,9 @@ public class AppDashboardView extends JFrame {
 		controllPanel.add(btnSyncVotes, gbc_btnSyncVotes);
 
 		btnAddParticipants = new JButton("Add Participants");
+		btnAddParticipants.setForeground(new Color(0, 51, 51));
+		btnAddParticipants.setBackground(new Color(255, 255, 255));
+		btnAddParticipants.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 		
 		GridBagConstraints gbc_btnAddParticipants = new GridBagConstraints();
 		gbc_btnAddParticipants.insets = new Insets(0, 0, 0, 5);
@@ -112,6 +123,9 @@ public class AppDashboardView extends JFrame {
 		controllPanel.add(btnAddParticipants, gbc_btnAddParticipants);
 
 		btnFinish = new JButton("Finish");
+		btnFinish.setForeground(new Color(0, 51, 51));
+		btnFinish.setBackground(new Color(255, 255, 255));
+		btnFinish.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 		
 		GridBagConstraints gbc_btnFinish = new GridBagConstraints();
 		gbc_btnFinish.gridx = 2;
