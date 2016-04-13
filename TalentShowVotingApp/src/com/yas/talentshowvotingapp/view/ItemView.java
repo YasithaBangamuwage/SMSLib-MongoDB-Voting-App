@@ -27,6 +27,8 @@ import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
 import com.yas.talentshowvotingapp.other.AppStatus;
 import javax.swing.JRadioButton;
+import java.awt.Font;
+import java.awt.Color;
 
 public class ItemView extends JFrame {
 
@@ -55,6 +57,7 @@ public class ItemView extends JFrame {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 527, 327);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
@@ -64,7 +67,9 @@ public class ItemView extends JFrame {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
-		JLabel lblCreateItems = new JLabel("Create Items");
+		JLabel lblCreateItems = new JLabel("ADD ITEMS");
+		lblCreateItems.setForeground(new Color(0, 255, 51));
+		lblCreateItems.setFont(new Font("Microsoft YaHei Light", Font.PLAIN, 19));
 		GridBagConstraints gbc_lblCreateItems = new GridBagConstraints();
 		gbc_lblCreateItems.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCreateItems.gridx = 0;
@@ -72,6 +77,7 @@ public class ItemView extends JFrame {
 		contentPane.add(lblCreateItems, gbc_lblCreateItems);
 
 		JLabel lblItemName = new JLabel("Item Name");
+		lblItemName.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblItemName = new GridBagConstraints();
 		gbc_lblItemName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblItemName.anchor = GridBagConstraints.EAST;
@@ -89,6 +95,7 @@ public class ItemView extends JFrame {
 		txtItemname.setColumns(10);
 
 		JLabel lblItemInfo = new JLabel("Item Info");
+		lblItemInfo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblItemInfo = new GridBagConstraints();
 		gbc_lblItemInfo.anchor = GridBagConstraints.EAST;
 		gbc_lblItemInfo.insets = new Insets(0, 0, 5, 5);
@@ -106,13 +113,16 @@ public class ItemView extends JFrame {
 		txtIteminfo.setColumns(10);
 
 		lblType = new JLabel("Type");
+		lblType.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblType = new GridBagConstraints();
+		gbc_lblType.anchor = GridBagConstraints.EAST;
 		gbc_lblType.insets = new Insets(0, 0, 5, 5);
 		gbc_lblType.gridx = 0;
 		gbc_lblType.gridy = 3;
 		contentPane.add(lblType, gbc_lblType);
 
 		panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.insets = new Insets(0, 0, 5, 0);
 		gbc_panel_1.fill = GridBagConstraints.BOTH;
@@ -126,13 +136,16 @@ public class ItemView extends JFrame {
 		gbl_panel_1.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 
-		rdbtnIsgroup = new JRadioButton("IsGroup");
+		rdbtnIsgroup = new JRadioButton("Is Group");
+		rdbtnIsgroup.setBackground(new Color(255, 255, 255));
+		rdbtnIsgroup.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 12));
 		GridBagConstraints gbc_rdbtnIsgroup = new GridBagConstraints();
 		gbc_rdbtnIsgroup.gridx = 0;
 		gbc_rdbtnIsgroup.gridy = 0;
 		panel_1.add(rdbtnIsgroup, gbc_rdbtnIsgroup);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 5, 0);
 		gbc_panel.fill = GridBagConstraints.BOTH;
@@ -146,7 +159,10 @@ public class ItemView extends JFrame {
 		gbl_panel.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
-		JLabel lblInfo = new JLabel("info");
+		JLabel lblInfo = new JLabel("");
+		lblInfo.setForeground(new Color(255, 0, 0));
+		lblInfo.setBackground(new Color(255, 255, 255));
+		lblInfo.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
 		gbc_lblInfo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInfo.gridx = 0;
@@ -154,6 +170,9 @@ public class ItemView extends JFrame {
 		panel.add(lblInfo, gbc_lblInfo);
 
 		btnCancel = new JButton("Cancel");
+		btnCancel.setBackground(new Color(255, 255, 255));
+		btnCancel.setForeground(new Color(0, 51, 51));
+		btnCancel.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
 		gbc_btnCancel.insets = new Insets(0, 0, 0, 5);
@@ -162,6 +181,9 @@ public class ItemView extends JFrame {
 		panel.add(btnCancel, gbc_btnCancel);
 
 		btnDelete = new JButton("Delete");
+		btnDelete.setBackground(new Color(255, 255, 255));
+		btnDelete.setForeground(new Color(0, 51, 51));
+		btnDelete.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
@@ -170,6 +192,9 @@ public class ItemView extends JFrame {
 		panel.add(btnDelete, gbc_btnDelete);
 
 		btnUpdate = new JButton("Update");
+		btnUpdate.setBackground(new Color(255, 255, 255));
+		btnUpdate.setForeground(new Color(0, 51, 51));
+		btnUpdate.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnUpdate = new GridBagConstraints();
 		gbc_btnUpdate.insets = new Insets(0, 0, 0, 5);
@@ -178,6 +203,9 @@ public class ItemView extends JFrame {
 		panel.add(btnUpdate, gbc_btnUpdate);
 
 		btnAdd = new JButton("Add");
+		btnAdd.setBackground(new Color(255, 255, 255));
+		btnAdd.setForeground(new Color(0, 51, 51));
+		btnAdd.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
 		gbc_btnAdd.insets = new Insets(0, 0, 0, 5);
@@ -186,6 +214,9 @@ public class ItemView extends JFrame {
 		panel.add(btnAdd, gbc_btnAdd);
 
 		btnNext = new JButton("Next >");
+		btnNext.setBackground(new Color(255, 255, 255));
+		btnNext.setForeground(new Color(0, 51, 51));
+		btnNext.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
 
 		GridBagConstraints gbc_btnNext = new GridBagConstraints();
 		gbc_btnNext.gridx = 4;
@@ -201,6 +232,8 @@ public class ItemView extends JFrame {
 		contentPane.add(scrollPane, gbc_scrollPane);
 
 		table = new JTable();
+		table.setBackground(new Color(255, 255, 255));
+		table.setFont(new Font("Microsoft JhengHei UI", Font.PLAIN, 11));
 
 		// make model to set
 
