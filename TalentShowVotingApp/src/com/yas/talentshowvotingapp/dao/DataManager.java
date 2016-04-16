@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.WriteResult;
 import com.mongodb.util.JSON;
 import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
@@ -20,6 +21,8 @@ import com.yas.talentshowvotingapp.service.VotingAppService;
 
 public class DataManager implements VotingAppService {
 
+	final static Logger logger = Logger.getLogger(DataManager.class);
+
 	@Override
 	public void addEvent(Event event) {
 		// add event to db
@@ -27,9 +30,8 @@ public class DataManager implements VotingAppService {
 		DBCollection dbCol = userDB.getCollection("event");
 		Gson gson = new Gson();
 		BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(event));
-		WriteResult result = dbCol.insert(obj);
-		// System.out.println("Added event : " + event.getName());
-
+		dbCol.insert(obj);
+		logger.info("Added event : " + event.getName());
 	}
 
 	@Override
@@ -42,8 +44,9 @@ public class DataManager implements VotingAppService {
 		searchQuery.put("isActive", Boolean.TRUE);
 
 		DBObject dbobj = dbCol.findOne(searchQuery);
-
-		return (new Gson()).fromJson(dbobj.toString(), Event.class);
+		Event event = (new Gson()).fromJson(dbobj.toString(), Event.class);
+		logger.info("getLatestActiveEvent : " + event.getName());
+		return event;
 	}
 
 	@Override
@@ -57,6 +60,7 @@ public class DataManager implements VotingAppService {
 		BasicDBObject updateCommand = new BasicDBObject("$set", new BasicDBObject("isActive", isActive));
 
 		dbCol.update(searchQuery, updateCommand);
+		logger.info("setEventActiveMode : " + eventId + " - " + isActive);
 	}
 
 	@Override
@@ -72,6 +76,8 @@ public class DataManager implements VotingAppService {
 		BasicDBObject newItem = (BasicDBObject) JSON.parse(gson.toJson(item));
 		BasicDBObject updateCommand = new BasicDBObject("$push", new BasicDBObject("items", newItem));
 		dbCol.update(searchQuery, updateCommand);
+
+		logger.info("addItem : " + event.getEventId() + " - " + newItem.toString());
 
 	}
 
@@ -94,6 +100,8 @@ public class DataManager implements VotingAppService {
 
 		dbCol.update(searchQuery, updateCommand);
 
+		logger.info("UpdateItem : " + eventId + " - " + updatedData);
+
 	}
 
 	@Override
@@ -112,6 +120,8 @@ public class DataManager implements VotingAppService {
 		updateCommand.put("$pull", new BasicDBObject("items", deletingItem));
 
 		dbCol.update(searchQuery, updateCommand);
+
+		logger.info("deleteItem : " + eventId + " - " + updateCommand);
 	}
 
 	@Override
@@ -123,6 +133,7 @@ public class DataManager implements VotingAppService {
 		BasicDBObject obj = (BasicDBObject) JSON.parse(gson.toJson(participant));
 		dbCol.insert(obj);
 
+		logger.info("addParticipant : " + obj);
 	}
 
 	@Override
@@ -136,6 +147,8 @@ public class DataManager implements VotingAppService {
 		match.put("eventId", eventId);
 		DBCursor cursor = dbCol.find(match);
 
+		logger.info("getEventParticipants : " + eventId + " - " + match);
+
 		DBObject participant = null;
 
 		while (cursor.hasNext()) {
@@ -146,6 +159,7 @@ public class DataManager implements VotingAppService {
 		}
 
 		return participants;
+
 	}
 
 	@Override
@@ -167,6 +181,8 @@ public class DataManager implements VotingAppService {
 
 		dbCol.update(searchQuery, updateCommand);
 
+		logger.info("updateParticipant : " + updatedData);
+
 	}
 
 	@Override
@@ -186,12 +202,14 @@ public class DataManager implements VotingAppService {
 			BasicDBObject updateCommand = new BasicDBObject("$set", updatedData);
 
 			dbCol.update(searchQuery, updateCommand);
+			logger.info("addVoteToParticipant : " + searchQuery + " - " + updateCommand);
 
 			Gson gson = new Gson();
 
 			BasicDBObject newVote = (BasicDBObject) JSON.parse(gson.toJson(participantWrapper.getVote()));
 			BasicDBObject updateCommand2 = new BasicDBObject("$push", new BasicDBObject("votes", newVote));
 			dbCol.update(searchQuery, updateCommand2);
+			logger.info("addVoteToParticipant : " + searchQuery + " - " + updateCommand);
 
 		}
 
@@ -207,6 +225,7 @@ public class DataManager implements VotingAppService {
 		BasicDBObject updateCommand = new BasicDBObject("$set", new BasicDBObject("endTime", endDate));
 
 		dbCol.update(searchQuery, updateCommand);
+		logger.info("setEventEndDate : " + searchQuery + " - " + updateCommand);
 	}
 
 	@Override
@@ -220,6 +239,7 @@ public class DataManager implements VotingAppService {
 
 		DBObject dbobj = dbCol.findOne(searchQuery);
 
+		logger.info("getEvent : " + eventId + " - " + dbobj);
 		return (new Gson()).fromJson(dbobj.toString(), Event.class);
 	}
 
@@ -231,6 +251,8 @@ public class DataManager implements VotingAppService {
 		DBCollection dbCol = userDB.getCollection("event");
 
 		DBCursor cursor = dbCol.find();
+		logger.info("getAllEvents : " + cursor.size());
+
 		while (cursor.hasNext()) {
 
 			events.add((new Gson()).fromJson(cursor.next().toString(), Event.class));

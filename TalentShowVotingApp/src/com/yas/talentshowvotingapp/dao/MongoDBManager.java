@@ -2,6 +2,8 @@ package com.yas.talentshowvotingapp.dao;
 
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Logger;
+
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.yas.talentshowvotingapp.other.PropertyHandler;
@@ -18,6 +20,8 @@ public class MongoDBManager {
 	 */
 	private static DB mongoMgr;
 
+	final static Logger logger = Logger.getLogger(MongoDBManager.class);
+
 	/**
 	 * Singleton method to get BD instance.
 	 * 
@@ -33,8 +37,9 @@ public class MongoDBManager {
 				// connect with the database
 				mongoMgr = mongo.getDB(PropertyHandler.getInstance().getStringValue("database"));
 				// .out.println("Connect to database(talentShow) successfully");
+				logger.info("Connect to database successfully");
 			} catch (UnknownHostException e) {
-				System.err.println(e.getClass().getName() + ": " + e.getMessage());
+				logger.error("Error in DB connection ", e);
 			}
 		}
 		return mongoMgr;
