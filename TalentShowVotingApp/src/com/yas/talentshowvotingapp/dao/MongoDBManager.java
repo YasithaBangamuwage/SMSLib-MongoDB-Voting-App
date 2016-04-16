@@ -4,6 +4,7 @@ import java.net.UnknownHostException;
 
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
+import com.yas.talentshowvotingapp.other.PropertyHandler;
 
 /**
  * @author YAS
@@ -27,10 +28,11 @@ public class MongoDBManager {
 			MongoClient mongo;
 			try {
 				// connect to mongodb server
-				mongo = new MongoClient("localhost", 27017);
+				mongo = new MongoClient(PropertyHandler.getInstance().getStringValue("mongoClientLocalhost"),
+						PropertyHandler.getInstance().getIntegerValue("mongoClientPort"));
 				// connect with the database
-				mongoMgr = mongo.getDB("talentShow");
-				//.out.println("Connect to database(talentShow) successfully");
+				mongoMgr = mongo.getDB(PropertyHandler.getInstance().getStringValue("database"));
+				// .out.println("Connect to database(talentShow) successfully");
 			} catch (UnknownHostException e) {
 				System.err.println(e.getClass().getName() + ": " + e.getMessage());
 			}

@@ -10,10 +10,10 @@ public class PropertyHandler {
 
 	private static PropertyHandler instance = null;
 	private InputStream input = null;
-	private Properties props = null;
+	private Properties props =  new Properties();
 
 	final static Logger logger = Logger.getLogger("PropertyHandler");
-	
+
 	private PropertyHandler() {
 		// Here you could read the file into props object
 
@@ -36,7 +36,12 @@ public class PropertyHandler {
 		return instance;
 	}
 
-	public String getValue(String propKey) {
+	public String getStringValue(String propKey) {
 		return this.props.getProperty(propKey);
 	}
+
+	public int getIntegerValue(String propKey) {
+		return Integer.parseInt(this.props.getProperty(propKey));
+	}
+
 }

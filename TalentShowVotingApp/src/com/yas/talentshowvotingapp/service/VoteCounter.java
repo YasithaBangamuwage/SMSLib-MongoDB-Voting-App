@@ -23,6 +23,8 @@ import org.smslib.TimeoutException;
 import org.smslib.crypto.AESKey;
 import org.smslib.modem.SerialModemGateway;
 
+import com.yas.talentshowvotingapp.other.PropertyHandler;
+
 public class VoteCounter {
 
 	public Service service;
@@ -44,7 +46,12 @@ public class VoteCounter {
 			System.out.println(Library.getLibraryDescription());
 			System.out.println("Version: " + Library.getLibraryVersion());
 			// Create the Gateway representing the serial GSM modem.
-			SerialModemGateway gateway = new SerialModemGateway("modem.com20", "COM20", 115200, "huawei", "E173");
+			SerialModemGateway gateway = new SerialModemGateway(
+					PropertyHandler.getInstance().getStringValue("serialModemGateway.id"),
+					PropertyHandler.getInstance().getStringValue("serialModemGateway.comPort"),
+					PropertyHandler.getInstance().getIntegerValue("serialModemGateway.baudRate"),
+					PropertyHandler.getInstance().getStringValue("serialModemGateway.manufacturer"),
+					PropertyHandler.getInstance().getStringValue("serialModemGateway.model"));
 			// Set the modem protocol to PDU (alternative is TEXT). PDU is the
 			// default, anyway...
 			gateway.setProtocol(Protocols.PDU);
@@ -53,10 +60,10 @@ public class VoteCounter {
 			// Do we want the Gateway to be used for Outbound messages?
 			gateway.setOutbound(true);
 			// Let SMSLib know which is the SIM PIN.
-			gateway.setSimPin("0000");
+			gateway.setSimPin(PropertyHandler.getInstance().getStringValue("simPin"));
 			// Set up the notification methods.
 
-			gateway.getATHandler().setStorageLocations("SM");
+			gateway.getATHandler().setStorageLocations(PropertyHandler.getInstance().getStringValue("storageLocation"));
 			// String SMSC = "+940713980848";
 			// gateway.setSmscNumber(SMSC);
 
