@@ -25,7 +25,6 @@ public class AppMainWindow {
 	private JFrame frame;
 	private JButton btnLaunchEvent;
 	private JButton btnEventHistory;
-	private JButton btnConfigurations;
 	private JPanel panel;
 
 	public JFrame getFrame() {
@@ -62,7 +61,8 @@ public class AppMainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 303, 375);
+		frame.getContentPane().setBackground(new Color(0, 51, 51));
+		frame.setBounds(100, 100, 305, 286);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new GridLayout(4, 0, 0, 0));
 		
@@ -104,14 +104,6 @@ public class AppMainWindow {
 
 		frame.getContentPane().add(btnEventHistory);
 
-		btnConfigurations = new JButton("Configurations");
-		btnConfigurations.setForeground(new Color(51, 153, 102));
-		btnConfigurations.setBackground(new Color(255, 255, 255));
-		btnConfigurations.setFont(new Font("Microsoft YaHei Light", Font.BOLD, 20));
-		btnConfigurations.setHorizontalAlignment(SwingConstants.LEADING);
-
-		frame.getContentPane().add(btnConfigurations);
-
 		/*********** events goes here ********************/
 
 		btnLaunchEvent.addActionListener(new ActionListener() {
@@ -126,14 +118,6 @@ public class AppMainWindow {
 			public void actionPerformed(ActionEvent e) {
 				AppController.getAppController().setAppStatus(AppStatus.DEFAULT);
 				AppController.getAppController().getEventHistoryController().getEventHistoryView()
-						.setVisible(Boolean.TRUE);
-			}
-		});
-
-		btnConfigurations.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				AppController.getAppController().getConfigurationController().getConfigurationView()
 						.setVisible(Boolean.TRUE);
 			}
 		});
