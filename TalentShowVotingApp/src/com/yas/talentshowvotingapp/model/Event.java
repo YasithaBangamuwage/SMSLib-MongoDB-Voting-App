@@ -7,12 +7,11 @@ public final class Event {
 
 	private String eventId;
 	private Date startTime;
-
-	private Date endTime;
 	private String name;
 	private String Organizer;
 	private boolean isActive;
 	private List<Item> items;
+	private Date endTime;
 
 	public Event(String eventId, Date startTime, Date endTime, String name, String organizer, boolean isActive,
 			List<Item> items) {

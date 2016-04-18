@@ -87,7 +87,7 @@ public class DashBoardController {
 						participantWrapperList.add(new ParticipantWrapper(vote, participant));
 
 						// delete msg from sim inbox
-						// getVoteCounter().deleteMessage(inboundMessage);
+						getVoteCounter().deleteMessage(inboundMessage);
 
 					}
 
@@ -107,19 +107,20 @@ public class DashBoardController {
 				votingAppService.getEventParticipants(
 						AppController.getAppController().getEventController().getEvent().getEventId()),
 				AppController.getAppController().getEventController().getLatestActiveEvent());
-		
-		/*****************need to sort participants according to the vote count*****************/
+
+		/*****************
+		 * need to sort participants according to the vote count
+		 *****************/
 
 	}
-	
-	
-	public void refreshDashBoard(){
-		
-		//manage votes if event ongoing
+
+	public void refreshDashBoard() {
+
+		// manage votes if event ongoing
 		managingVotes();
-		//update view with latest event data
+		// update view with latest event data
 		getAppDashboardView().refreshItemScrollPane();
-		
+
 	}
 
 	private boolean isInt(String s) {

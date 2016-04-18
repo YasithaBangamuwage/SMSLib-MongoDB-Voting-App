@@ -104,7 +104,7 @@ public class AppDashboardView extends JFrame {
 		btnSyncVotes.setForeground(new Color(0, 51, 51));
 		btnSyncVotes.setBackground(new Color(255, 255, 255));
 		btnSyncVotes.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
-		
+
 		GridBagConstraints gbc_btnSyncVotes = new GridBagConstraints();
 		gbc_btnSyncVotes.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSyncVotes.gridx = 0;
@@ -115,7 +115,7 @@ public class AppDashboardView extends JFrame {
 		btnAddParticipants.setForeground(new Color(0, 51, 51));
 		btnAddParticipants.setBackground(new Color(255, 255, 255));
 		btnAddParticipants.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
-		
+
 		GridBagConstraints gbc_btnAddParticipants = new GridBagConstraints();
 		gbc_btnAddParticipants.insets = new Insets(0, 0, 0, 5);
 		gbc_btnAddParticipants.gridx = 1;
@@ -126,62 +126,53 @@ public class AppDashboardView extends JFrame {
 		btnFinish.setForeground(new Color(0, 51, 51));
 		btnFinish.setBackground(new Color(255, 255, 255));
 		btnFinish.setFont(new Font("Microsoft JhengHei UI", Font.BOLD, 12));
-		
+
 		GridBagConstraints gbc_btnFinish = new GridBagConstraints();
 		gbc_btnFinish.gridx = 2;
 		gbc_btnFinish.gridy = 1;
 		controllPanel.add(btnFinish, gbc_btnFinish);
 
-		/********************events goes here*********************/
-		
-		
+		/******************** events goes here *********************/
+
 		btnSyncVotes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				if (!AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_ONGOING)) {
 					AppController.getAppController().setAppStatus(AppStatus.EVENT_ONGOING);
 				}
 
 				AppController.getAppController().getDashBoardController().refreshDashBoard();
-				
-				/*SwingUtilities.invokeLater(new Runnable() {
-	                @Override
-	                public void run() {
-	                	AppController.getAppController().getDashBoardController().getAppDashboardView().validate();
-	                	AppController.getAppController().getDashBoardController().getAppDashboardView().repaint();
-	                	//AppController.getAppController().getDashBoardController().getAppDashboardView().pack();
-	                	
-	                }
-	            });*/
-				
+
+				AppController.getAppController().getDashBoardController().getAppDashboardView().validate();
+				AppController.getAppController().getDashBoardController().getAppDashboardView().repaint();
+
 			}
 		});
-		
+
 		btnAddParticipants.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AppController.getAppController().getParticipantContoller().getParticipantView().getBtnNext()
-				.setVisible(Boolean.FALSE);
-		AppController.getAppController().getParticipantContoller().getParticipantView()
-				.setVisible(Boolean.TRUE);
+						.setVisible(Boolean.FALSE);
+				AppController.getAppController().getParticipantContoller().getParticipantView()
+						.setVisible(Boolean.TRUE);
 			}
 		});
-		
+
 		btnFinish.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				int dialogResult = JOptionPane.showConfirmDialog(null,
-						"Are you sure you wants finish the event?", "Warning",
-						JOptionPane.YES_NO_OPTION);
+
+				int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you wants finish the event?",
+						"Warning", JOptionPane.YES_NO_OPTION);
 				if (dialogResult == JOptionPane.YES_OPTION) {
 					AppController.getAppController().setAppStatus(AppStatus.DEFAULT);
 					AppController.getAppController().getDashBoardController().getAppDashboardView()
 							.setVisible(Boolean.FALSE);
 					AppController.getAppController().getEventController().setEventEndDate(new Date());
-					
+
 					AppController.getAppController().setAppToDefaultMode();
 
 				}
-				
+
 			}
 		});
 	}
