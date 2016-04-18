@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.log4j.Logger;
 import org.smslib.AGateway;
 import org.smslib.AGateway.GatewayStatuses;
 import org.smslib.AGateway.Protocols;
@@ -23,11 +24,14 @@ import org.smslib.TimeoutException;
 import org.smslib.crypto.AESKey;
 import org.smslib.modem.SerialModemGateway;
 
+import com.yas.talentshowvotingapp.dao.DataManager;
 import com.yas.talentshowvotingapp.other.PropertyHandler;
 
 public class VoteCounter {
 
 	public Service service;
+
+	final static Logger logger = Logger.getLogger(DataManager.class);
 
 	public VoteCounter() {
 		super();
@@ -42,9 +46,10 @@ public class VoteCounter {
 		GatewayStatusNotification statusNotification = new GatewayStatusNotification();
 		OrphanedMessageNotification orphanedMessageNotification = new OrphanedMessageNotification();
 		try {
-			System.out.println("Example: Read messages from a serial gsm modem.");
-			System.out.println(Library.getLibraryDescription());
-			System.out.println("Version: " + Library.getLibraryVersion());
+			logger.info("Read messages from a serial gsm modem.");
+			logger.info(Library.getLibraryDescription());
+			logger.info("Version: " + Library.getLibraryVersion());
+
 			// Create the Gateway representing the serial GSM modem.
 			SerialModemGateway gateway = new SerialModemGateway(
 					PropertyHandler.getInstance().getStringValue("serialModemGateway.id"),
@@ -82,15 +87,15 @@ public class VoteCounter {
 			service = Service.getInstance();
 
 			// Printout some general information about the modem.
-			System.out.println();
-			System.out.println("Modem Information:");
-			System.out.println("  Manufacturer: " + gateway.getManufacturer());
-			System.out.println("  Model: " + gateway.getModel());
-			System.out.println("  Serial No: " + gateway.getSerialNo());
-			System.out.println("  SIM IMSI: " + gateway.getImsi());
-			System.out.println("  Signal Level: " + gateway.getSignalLevel() + " dBm");
-			System.out.println("  Battery Level: " + gateway.getBatteryLevel() + "%");
-			System.out.println();
+
+			logger.info("Modem Information:");
+			logger.info("Manufacturer: " + gateway.getManufacturer());
+			logger.info("Model: " + gateway.getModel());
+			logger.info("Serial No: " + gateway.getSerialNo());
+			logger.info("SIM IMSI: " + gateway.getImsi());
+			logger.info("Signal Level: " + gateway.getSignalLevel() + " dBm");
+			logger.info("Battery Level: " + gateway.getBatteryLevel() + "%");
+
 			// In case you work with encrypted messages, its a good time to
 			// declare your keys.
 			// Create a new AES Key with a known key value.
@@ -139,32 +144,34 @@ public class VoteCounter {
 		public void process(AGateway gateway, MessageTypes msgType, InboundMessage msg) {
 			if (msgType == MessageTypes.INBOUND) {
 
-				System.out.println(">>> New Inbound message detected from Gateway: " + gateway.getGatewayId());
-				System.out.println("samyan Qayyum Wahla " + msg.getOriginator());
-			} else if (msgType == MessageTypes.STATUSREPORT)
-				System.out.println(
-						">>> New Inbound Status Report message detected from Gateway: " + gateway.getGatewayId());
-			System.out.println(msg);
+				logger.info("New Inbound message detected from Gateway: " + gateway.getGatewayId());
+				logger.info(msg.getOriginator());
+
+			} else if (msgType == MessageTypes.STATUSREPORT) {
+
+				logger.info("New Inbound Status Report message detected from Gateway: " + gateway.getGatewayId());
+			}
+			logger.info(msg);
 		}
 	}
 
 	public static class CallNotification implements ICallNotification {
 		public void process(AGateway gateway, String callerId) {
-			System.out.println(">>> New call detected from Gateway: " + gateway.getGatewayId() + " : " + callerId);
+			logger.info("New call detected from Gateway: " + gateway.getGatewayId() + " : " + callerId);
 		}
 	}
 
 	public static class GatewayStatusNotification implements IGatewayStatusNotification {
 		public void process(AGateway gateway, GatewayStatuses oldStatus, GatewayStatuses newStatus) {
-			System.out.println(">>> Gateway Status change for " + gateway.getGatewayId() + ", OLD: " + oldStatus
-					+ " -> NEW: " + newStatus);
+			logger.info("Gateway Status change for " + gateway.getGatewayId() + ", OLD: " + oldStatus + " -> NEW: "
+					+ newStatus);
 		}
 	}
 
 	public static class OrphanedMessageNotification implements IOrphanedMessageNotification {
 		public boolean process(AGateway gateway, InboundMessage msg) {
-			System.out.println(">>> Orphaned message part detected from " + gateway.getGatewayId());
-			System.out.println(msg);
+			logger.info("Orphaned message part detected from " + gateway.getGatewayId());
+			logger.info(msg);
 			// Since we are just testing, return FALSE and keep the orphaned
 			// message part.
 			return false;
