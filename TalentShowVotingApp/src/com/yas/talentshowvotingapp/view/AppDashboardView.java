@@ -167,7 +167,7 @@ public class AppDashboardView extends JFrame {
 					AppController.getAppController().setAppStatus(AppStatus.DEFAULT);
 					AppController.getAppController().getDashBoardController().getAppDashboardView()
 							.setVisible(Boolean.FALSE);
-					AppController.getAppController().getEventController().setEventEndDate(new Date());
+					//AppController.getAppController().getEventController().setEventEndDate(new Date());
 
 					AppController.getAppController().setAppToDefaultMode();
 

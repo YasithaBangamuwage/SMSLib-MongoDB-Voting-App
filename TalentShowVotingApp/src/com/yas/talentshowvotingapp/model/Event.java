@@ -11,14 +11,14 @@ public final class Event {
 	private String Organizer;
 	private boolean isActive;
 	private List<Item> items;
-	private Date endTime;
+	//private Date endTime;
 
-	public Event(String eventId, Date startTime, Date endTime, String name, String organizer, boolean isActive,
+	public Event(String eventId, Date startTime,String name, String organizer, boolean isActive,
 			List<Item> items) {
 		super();
 		this.eventId = eventId;
 		this.startTime = startTime;
-		this.endTime = endTime;
+		//this.endTime = endTime;
 		this.name = name;
 		Organizer = organizer;
 		this.isActive = isActive;
@@ -49,13 +49,13 @@ public final class Event {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	/*public Date getEndTime() {
 		return endTime;
 	}
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
-	}
+	}*/
 
 	public String getName() {
 		return name;

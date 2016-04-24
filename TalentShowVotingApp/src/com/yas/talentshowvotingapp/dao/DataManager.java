@@ -215,18 +215,18 @@ public class DataManager implements VotingAppService {
 
 	}
 
-	@Override
-	public void setEventEndDate(String eventId, Date endDate) {
-		DB userDB = MongoDBManager.getInstance();
-		DBCollection dbCol = userDB.getCollection("event");
-
-		BasicDBObject searchQuery = new BasicDBObject();
-		searchQuery.put("eventId", eventId);
-		BasicDBObject updateCommand = new BasicDBObject("$set", new BasicDBObject("endTime", endDate));
-
-		dbCol.update(searchQuery, updateCommand);
-		logger.info("setEventEndDate : " + searchQuery + " - " + updateCommand);
-	}
+	/*
+	 * @Override public void setEventEndDate(String eventId, Date endDate) { DB
+	 * userDB = MongoDBManager.getInstance(); DBCollection dbCol =
+	 * userDB.getCollection("event");
+	 * 
+	 * BasicDBObject searchQuery = new BasicDBObject();
+	 * searchQuery.put("eventId", eventId); BasicDBObject updateCommand = new
+	 * BasicDBObject("$set", new BasicDBObject("endTime", endDate));
+	 * 
+	 * dbCol.update(searchQuery, updateCommand); logger.info(
+	 * "setEventEndDate : " + searchQuery + " - " + updateCommand); }
+	 */
 
 	@Override
 	public Event getEvent(String eventId) {
@@ -260,6 +260,20 @@ public class DataManager implements VotingAppService {
 		}
 
 		return events;
+	}
+
+	@Override
+	public void setIsActiveFalseForEvents() {
+
+		for (Event event : getAllEvents()) {
+			setEventActiveMode(event.getEventId(), Boolean.FALSE);
+		}
+	}
+
+	@Override
+	public void setAsActiveEvent(String eventId) {
+		setEventActiveMode(eventId, Boolean.TRUE);
+		
 	}
 
 }

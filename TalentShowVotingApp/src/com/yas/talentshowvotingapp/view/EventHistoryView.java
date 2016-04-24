@@ -22,6 +22,9 @@ import com.yas.talentshowvotingapp.controller.AppController;
 import com.yas.talentshowvotingapp.model.Event;
 import com.yas.talentshowvotingapp.model.Item;
 import com.yas.talentshowvotingapp.model.Participant;
+import com.yas.talentshowvotingapp.other.AppStatus;
+
+import javax.swing.JButton;
 
 public class EventHistoryView extends JFrame {
 
@@ -31,6 +34,7 @@ public class EventHistoryView extends JFrame {
 	private JLabel lblEventhistory;
 	private JLabel lblEvent;
 	private JComboBox comboBox;
+	private JButton btnLaunch;
 
 	/**
 	 * Launch the application.
@@ -47,7 +51,7 @@ public class EventHistoryView extends JFrame {
 	 */
 	public EventHistoryView() {
 		initComponents();
-		addEventsIntoComboBox(AppController.getAppController().getEventController().getAvailbleEvents());
+		// addEventsIntoComboBox(AppController.getAppController().getEventController().getAvailbleEvents());
 	}
 
 	private void initComponents() {
@@ -118,13 +122,43 @@ public class EventHistoryView extends JFrame {
 		gbc_comboBox.gridy = 1;
 		controllPanel.add(comboBox, gbc_comboBox);
 
+		btnLaunch = new JButton("Launch");
+
+		GridBagConstraints gbc_btnLaunch = new GridBagConstraints();
+		gbc_btnLaunch.gridx = 2;
+		gbc_btnLaunch.gridy = 1;
+		controllPanel.add(btnLaunch, gbc_btnLaunch);
+
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (comboBox.getItemCount() > 0) {
 
 					refreshItemScrollPane(((ComboBoxEventWrapper) comboBox.getSelectedItem()).getEvent().getEventId());
+					AppController.getAppController().getEventHistoryController().getEventHistoryView().validate();
+					AppController.getAppController().getEventHistoryController().getEventHistoryView().repaint();
 				}
+			}
+		});
+
+		btnLaunch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				AppController.getAppController().getEventController()
+						.setAsActiveEvent(((ComboBoxEventWrapper) comboBox.getSelectedItem()).getEvent().getEventId());
+
+				
+				AppController.getAppController().getEventHistoryController().getEventHistoryView().setVisible(Boolean.FALSE);
+				AppController.getAppController().getEventController().getLatestActiveEvent();
+
+				// set all availabe participants into event
+				AppController.getAppController().getEventHistoryController().setAllParticipantsToEvent();
+
+				AppController.getAppController().getDashBoardController().getAppDashboardView()
+						.setVisible(Boolean.TRUE);
+				AppController.getAppController().getDashBoardController().getAppDashboardView().refreshItemScrollPane();
+				AppController.getAppController().setAppStatus(AppStatus.EVENT_CREATED);
+
 			}
 		});
 
@@ -189,7 +223,7 @@ public class EventHistoryView extends JFrame {
 		}
 	}
 
-	private void addEventsIntoComboBox(final List<Event> evevts) {
+	public void addEventsIntoComboBox(final List<Event> evevts) {
 
 		comboBox.removeAllItems();
 

@@ -156,7 +156,7 @@ public class EventView extends JFrame {
 				if (!txtEventname.getText().isEmpty() && !txtOrganizername.getText().isEmpty()) {
 					// add event
 					AppController.getAppController().getEventController()
-							.addEvent(new Event(UUID.randomUUID().toString(), new Date(), null, txtEventname.getText(),
+							.addEvent(new Event(UUID.randomUUID().toString(), new Date(), txtEventname.getText(),
 									txtOrganizername.getText(), Boolean.TRUE, new ArrayList<Item>()));
 					// enable nextbtn
 					btnNext.setEnabled(Boolean.TRUE);

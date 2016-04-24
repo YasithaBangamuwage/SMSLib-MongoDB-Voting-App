@@ -1,6 +1,7 @@
 package com.yas.talentshowvotingapp.controller;
 
 import com.yas.talentshowvotingapp.other.AppStatus;
+import com.yas.talentshowvotingapp.service.VotingAppService;
 import com.yas.talentshowvotingapp.view.AppDashboardView;
 import com.yas.talentshowvotingapp.view.ConfigurationView;
 import com.yas.talentshowvotingapp.view.EventHistoryView;
@@ -119,6 +120,7 @@ public class AppController {
 
 	}
 
+	
 	public AppStatus getAppStatus() {
 		return appStatus;
 	}

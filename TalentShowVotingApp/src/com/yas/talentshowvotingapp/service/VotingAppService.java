@@ -30,10 +30,14 @@ public interface VotingAppService {
 	
 	void addVoteToParticipant(final List<ParticipantWrapper> participantWrapperList);
 	
-	void setEventEndDate(final String eventId, final Date endDate);
+	//void setEventEndDate(final String eventId, final Date endDate);
 
 	Event getEvent(final String eventId);
 	
 	List<Event> getAllEvents();
+	
+	void setIsActiveFalseForEvents();
+	
+	void setAsActiveEvent(String eventId);
 	
 }

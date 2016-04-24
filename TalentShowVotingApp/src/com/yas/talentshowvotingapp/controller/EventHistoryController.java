@@ -45,6 +45,23 @@ public class EventHistoryController {
 		return event;
 	}
 
+	public void loadEventHistoryData() {
+
+		AppController.getAppController().getEventController().setIsActiveFalseForEvents();
+		getEventHistoryView()
+				.addEventsIntoComboBox(AppController.getAppController().getEventController().getAvailbleEvents());
+
+	}
+
+	public void setAllParticipantsToEvent() {
+
+		AppController.getAppController().getParticipantContoller().updateActiveEventWithParticipants(
+				votingAppService.getEventParticipants(
+						AppController.getAppController().getEventController().getEvent().getEventId()),
+				AppController.getAppController().getEventController().getLatestActiveEvent());
+
+	}
+
 	public EventHistoryView getEventHistoryView() {
 		return eventHistoryView;
 	}

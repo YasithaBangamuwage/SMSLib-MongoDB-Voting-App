@@ -47,23 +47,23 @@ public class ParticipantContoller {
 
 	public void addParticipant(final String itemId, Participant participant) {
 
-		//if (isRefNoIsExsits(participant)) {
-			// update participant eventid and itemid
-			participant.setEventId(AppController.getAppController().getEventController().getEvent().getEventId());
-			participant.setItemId(itemId);
+		// if (isRefNoIsExsits(participant)) {
+		// update participant eventid and itemid
+		participant.setEventId(AppController.getAppController().getEventController().getEvent().getEventId());
+		participant.setItemId(itemId);
 
-			// add participant into db
-			votingAppService.addParticipant(participant);
+		// add participant into db
+		votingAppService.addParticipant(participant);
 
-			this.participantList.clear();
-			this.participantList = votingAppService.getEventParticipants(
-					AppController.getAppController().getEventController().getEvent().getEventId());
+		this.participantList.clear();
+		this.participantList = votingAppService
+				.getEventParticipants(AppController.getAppController().getEventController().getEvent().getEventId());
 
-			// update with latest event data
+		// update with latest event data
 
-			updateActiveEventWithParticipants(getParticipantList(),
-					AppController.getAppController().getEventController().getLatestActiveEvent());
-		//}
+		updateActiveEventWithParticipants(getParticipantList(),
+				AppController.getAppController().getEventController().getLatestActiveEvent());
+		// }
 
 	}
 
@@ -120,4 +120,6 @@ public class ParticipantContoller {
 		}
 		return false;
 	}
+
+
 }

@@ -52,8 +52,20 @@ public class EventController {
 	}
 
 	public void setEventEndDate(final Date endDate) {
-		votingAppService.setEventEndDate(this.event.getEventId(), endDate);
+		//votingAppService.setEventEndDate(this.event.getEventId(), endDate);
 	}
+	
+	public void setIsActiveFalseForEvents(){
+		votingAppService.setIsActiveFalseForEvents();
+		
+	}
+	
+	public void setAsActiveEvent(String eventId){
+		votingAppService.setAsActiveEvent(eventId);
+		
+	}
+	
+
 
 	public Event getEvent() {
 		return event;
