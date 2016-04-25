@@ -1,6 +1,7 @@
 package com.yas.talentshowvotingapp.dao;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -157,7 +158,7 @@ public class DataManager implements VotingAppService {
 			participants.add((new Gson()).fromJson(participant.toString(), Participant.class));
 
 		}
-
+		Collections.sort(participants);
 		return participants;
 
 	}

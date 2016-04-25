@@ -3,7 +3,7 @@ package com.yas.talentshowvotingapp.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class Participant {
+public final class Participant implements Comparable {
 
 	private String eventId;
 	private String itemId;
@@ -98,6 +98,14 @@ public final class Participant {
 
 	public void setVotes(List<Vote> votes) {
 		this.votes = votes;
+	}
+
+	@Override
+	public int compareTo(Object participant) {
+		int count = ((Participant) participant).getVoteCount();
+		/* For Ascending order */
+		//return this.voteCount - count;
+		return count - this.voteCount;
 	}
 
 }

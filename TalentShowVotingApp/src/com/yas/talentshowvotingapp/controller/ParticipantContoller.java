@@ -1,6 +1,7 @@
 package com.yas.talentshowvotingapp.controller;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.yas.talentshowvotingapp.dao.DataManager;
@@ -100,16 +101,13 @@ public class ParticipantContoller {
 					item.getParticipants().add(participant);
 				}
 			}
+
 			itemsWithParticipants.add(item);
 		}
 		AppController.getAppController().getEventController().getEvent().getItems().clear();
+
 		AppController.getAppController().getEventController().getEvent().setItems(itemsWithParticipants);
 	}
-
-	/*
-	 * private boolean isRefNoIsExsits(){
-	 * AppController.getAppController().getItemController(). }
-	 */
 
 	public boolean isRefNoIsExsits(Participant newParticipant) {
 
@@ -120,6 +118,5 @@ public class ParticipantContoller {
 		}
 		return false;
 	}
-
 
 }

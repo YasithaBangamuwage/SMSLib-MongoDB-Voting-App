@@ -133,6 +133,9 @@ public class DashBoardController {
 						AppController.getAppController().getEventController().getEvent().getEventId()),
 				AppController.getAppController().getEventController().getLatestActiveEvent());
 
+		
+		
+		
 		/*****************
 		 * need to sort participants according to the vote count
 		 *****************/

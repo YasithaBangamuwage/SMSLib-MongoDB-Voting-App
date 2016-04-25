@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Date;
 
 import javax.swing.BorderFactory;
@@ -19,6 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
+
+import org.smslib.SMSLibException;
 
 import com.yas.talentshowvotingapp.controller.AppController;
 import com.yas.talentshowvotingapp.model.Event;
@@ -137,6 +140,7 @@ public class AppDashboardView extends JFrame {
 		btnSyncVotes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
+				btnSyncVotes.setEnabled(Boolean.FALSE);
 				if (!AppController.getAppController().getAppStatus().equals(AppStatus.EVENT_ONGOING)) {
 					AppController.getAppController().setAppStatus(AppStatus.EVENT_ONGOING);
 				}
@@ -145,7 +149,7 @@ public class AppDashboardView extends JFrame {
 
 				AppController.getAppController().getDashBoardController().getAppDashboardView().validate();
 				AppController.getAppController().getDashBoardController().getAppDashboardView().repaint();
-
+				btnSyncVotes.setEnabled(Boolean.TRUE);
 			}
 		});
 
@@ -168,7 +172,12 @@ public class AppDashboardView extends JFrame {
 					AppController.getAppController().getDashBoardController().getAppDashboardView()
 							.setVisible(Boolean.FALSE);
 					//AppController.getAppController().getEventController().setEventEndDate(new Date());
-
+					try {
+						AppController.getAppController().getDashBoardController().getVoteCounter().getService().stopService();
+					} catch (SMSLibException | IOException | InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					AppController.getAppController().setAppToDefaultMode();
 
 				}
