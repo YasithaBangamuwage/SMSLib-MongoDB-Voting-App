@@ -76,18 +76,43 @@ public class DashBoardController {
 					// participant have the vote
 					if (participant.getRefNo().equals(inboundMessage.getText())) {
 
-						isParticipantFound = true;
+						boolean alreadyVoted = Boolean.FALSE;
 
-						participant.setVoteCount(participant.getVoteCount() + 1);
+						for (Vote vote : participant.getVotes()) {
 
-						// set participantWrapperList
-						Vote vote = new Vote(inboundMessage.getDate(), inboundMessage.getOriginator(),
-								inboundMessage.getText());
+							if (vote.getSenderNumber().equals(inboundMessage.getOriginator())) {
+								alreadyVoted = Boolean.TRUE;
+								break;
+							}
+						}
 
-						participantWrapperList.add(new ParticipantWrapper(vote, participant));
+						for (ParticipantWrapper wrapper : participantWrapperList) {
 
-						// delete msg from sim inbox
-						getVoteCounter().deleteMessage(inboundMessage);
+							if (wrapper.getVote().getSenderNumber().equals(inboundMessage.getOriginator())) {
+								alreadyVoted = Boolean.TRUE;
+								getVoteCounter().deleteMessage(inboundMessage);
+								break;
+							}
+						}
+
+						if (!alreadyVoted) {
+
+							isParticipantFound = true;
+
+							participant.setVoteCount(participant.getVoteCount() + 1);
+
+							// set participantWrapperList
+							Vote vote = new Vote(inboundMessage.getDate(), inboundMessage.getOriginator(),
+									inboundMessage.getText());
+
+							participantWrapperList.add(new ParticipantWrapper(vote, participant));
+
+							// delete msg from sim inbox
+							getVoteCounter().deleteMessage(inboundMessage);
+
+						} else {
+							getVoteCounter().deleteMessage(inboundMessage);
+						}
 
 					}
 
