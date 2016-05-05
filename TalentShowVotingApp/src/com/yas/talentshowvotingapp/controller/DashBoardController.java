@@ -88,9 +88,10 @@ public class DashBoardController {
 
 						for (ParticipantWrapper wrapper : participantWrapperList) {
 
-							if (wrapper.getVote().getSenderNumber().equals(inboundMessage.getOriginator())) {
+							if (wrapper.getUpdatedParticipant().getParticipantId()
+									.equals(participant.getParticipantId())
+									&& wrapper.getVote().getSenderNumber().equals(inboundMessage.getOriginator())) {
 								alreadyVoted = Boolean.TRUE;
-								getVoteCounter().deleteMessage(inboundMessage);
 								break;
 							}
 						}
@@ -120,6 +121,9 @@ public class DashBoardController {
 						break;
 					}
 				}
+			} else {
+				// unwanted msg
+				getVoteCounter().deleteMessage(inboundMessage);
 			}
 
 		}
@@ -133,9 +137,6 @@ public class DashBoardController {
 						AppController.getAppController().getEventController().getEvent().getEventId()),
 				AppController.getAppController().getEventController().getLatestActiveEvent());
 
-		
-		
-		
 		/*****************
 		 * need to sort participants according to the vote count
 		 *****************/
