@@ -1,6 +1,6 @@
 # SMSLib-MongoDB-Voting-App
 
-Install MongoDb to your computer and add properties to config.properties
+Install MongoDb to your computer and add properties to config.properties<br />
 
 mongoClientLocalhost=localhost (hosting server)
 mongoClientPort=27017 (port that use mongodb)
